@@ -1,18 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Container } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-const THEME = createTheme({});
+import Layout from "./Site.Layout";
 
 const App = () => {
-  return (
-    <ThemeProvider theme={THEME}>
-      <Container maxWidth="md">
-          Scaffolding React App With Material UI
-      </Container>
-    </ThemeProvider>
-  );
+  return <Layout>Site Layout Added</Layout>;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
