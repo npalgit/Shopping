@@ -6,7 +6,7 @@ import EmptyList from "../../../components/EmptyList";
 import AddModal from "../new";
 import EditModal from "../edit";
 
-const mockList = [
+const items = [
   {
     _id: 1,
     name: "Tomatoes",
