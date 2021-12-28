@@ -19,7 +19,7 @@ import Typography from "@mui/material/Typography";
 import useForm from "../../../hooks/useForm";
 import { formValidation, itemQuantities } from "../_utility";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
-import { ADD, EDIT } from "../constants";
+import { ADD, EDIT } from "../../../constants";
 
 const ItemForm = ({ shoppingItem, mode, open, setOpen }) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
