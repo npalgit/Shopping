@@ -23,7 +23,7 @@ const useForm = (props) => {
   }, [values]);
 
   useEffect(() => {
-    if (initialValues)
+    if (initialValues && !Object.is(initialValues, values))
       setValues((values) => ({
         ...values,
         ...initialValues,
