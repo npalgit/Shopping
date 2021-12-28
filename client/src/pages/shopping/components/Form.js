@@ -19,18 +19,18 @@ import Typography from "@mui/material/Typography";
 import useForm from "../../../hooks/useForm";
 import { formValidation, itemQuantities } from "../_utility";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
-import { ADD, EDIT } from "../../../constants";
+import { ADD, EDIT, form_text_builder } from "../../../constants";
 
 const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [isFormSubmit, setIsFormSubmit] = useState(false);
   const classes = FormStyles();
-
+  const { PRIMARY_TEXT, SECONDARY_TEXT, BUTTON_TEXT } = form_text_builder(mode);
   const { values, errors, handleChangeKV, handleSubmit } = useForm({
     initialValues: shoppingItem,
     onSubmit(values) {
       setIsFormLoading(true);
-      apiCall(values).then(()=>{
+      apiCall(values).then(() => {
         handleClose();
       });
     },
@@ -57,9 +57,9 @@ const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
           <Box component="form" onSubmit={handleSubmit} noValidate>
             <DialogContent>
               <DialogContentText className={classes.title}>
-                Add an Item
+                {PRIMARY_TEXT}
               </DialogContentText>
-              <DialogContentText>Add your new item below</DialogContentText>
+              <DialogContentText>{SECONDARY_TEXT}</DialogContentText>
 
               <TextField
                 id="itemName"
@@ -137,7 +137,7 @@ const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
               <SubmitButtonWithLoader
-                buttonText={"Add Item"}
+                buttonText={BUTTON_TEXT}
                 loading={isFormLoading}
               />
             </DialogActions>
