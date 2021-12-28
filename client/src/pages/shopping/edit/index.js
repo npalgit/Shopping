@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../components/Form";
-import { EDIT } from "../constants";
+import { EDIT } from "../../../constants";
 
 const EditItemModal = ({ shoppingItem, open, setOpen, isEdit }) => {
   return (

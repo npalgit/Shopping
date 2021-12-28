@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "../components/Form";
 import { initialValues } from "../_utility";
-import { ADD, EDIT } from "../constants";
+import { ADD } from "../../../constants";
+
 
 const AddItemModal = ({ open, setOpen, isEdit }) => {
   return (

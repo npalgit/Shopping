@@ -3,7 +3,7 @@ import { getItems } from "./api";
 
 function useItems() {
   const [items, setItems] = React.useState({
-    items: [],
+    list: [],
     isError: false,
     isLoading: true,
   });
@@ -14,7 +14,7 @@ function useItems() {
 
   function handleSuccess(response) {
     setItems({
-      items: response.data,
+      list: response.data,
       isError: false,
       isLoading: false,
     });
@@ -22,7 +22,7 @@ function useItems() {
 
   function handleFailure() {
     setItems({
-      items: [],
+      list: [],
       isError: true,
       isLoading: false,
     });

@@ -5,37 +5,9 @@ import ListHeader from "../../../components/ListHeader";
 import EmptyList from "../../../components/EmptyList";
 import AddModal from "../new";
 import EditModal from "../edit";
+import useItems from "./useItems";
+import { CircularProgress, Box } from "@mui/material";
 
-const items = [
-  {
-    _id: 1,
-    name: "Tomatoes",
-    description: "Green Cherry Tomatoes",
-    quantity: 1,
-    isPurchased: false,
-  },
-  {
-    _id: 2,
-    name: "Onion",
-    description: "Red Tomatoes",
-    quantity: 5,
-    isPurchased: true,
-  },
-  {
-    _id: 3,
-    name: "Potato",
-    description: "Sweet Potato",
-    quantity: 3,
-    isPurchased: false,
-  },
-  {
-    _id: 4,
-    name: "Chili",
-    description: "Red Chili",
-    quantity: 1,
-    isPurchased: false,
-  },
-];
 
 const List = () => {
   const [formModalopen, setFormModalopen] = React.useState({
@@ -50,7 +22,19 @@ const List = () => {
     setFormModalopen({ open: true });
   };
   const isEdit = !!formModalopen.selectedItem;
+
+  const { list: items, isError, isLoading } = useItems();
+
+  if (isLoading) {
+    return (
+      <Box component="span" m={1}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   const isEmptyList = items && items.length == 0;
+
   return (
     <>
       <ListHeader
