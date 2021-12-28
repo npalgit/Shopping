@@ -14,8 +14,15 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+app.use(express.static(path.join(__dirname,'../client/build')));
+
 // routes
 app.use("/api/v1", cors(), apiRouter);
+
+//render react app
+app.get('/', function(req, res){
+  res.sendFile('index.html', { root: path.join(__dirname, '../client/build') });
+});
 
 connectDB()
   .then(() => {
