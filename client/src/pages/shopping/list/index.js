@@ -2,6 +2,7 @@ import React from "react";
 import ListShoppingItems from "../components/List";
 import DeleteModal from "../components/Delete";
 import ListHeader from "../../../components/ListHeader";
+import EmptyList from "../../../components/EmptyList";
 import AddModal from "../new";
 import EditModal from "../edit";
 
@@ -49,11 +50,19 @@ const List = () => {
     setFormModalopen({ open: true });
   };
   const isEdit = !!formModalopen.selectedItem;
+  const isEmptyList = items && items.length == 0;
   return (
     <>
-      <ListHeader handleClickFormModalOpen={handleClickFormModalOpen} />
+      <ListHeader
+        handleClickFormModalOpen={handleClickFormModalOpen}
+        isEmpty={isEmptyList}
+      />
+      <EmptyList
+        handleClickFormModalOpen={handleClickFormModalOpen}
+        isEmpty={isEmptyList}
+      />
       <ListShoppingItems
-        items={mockList}
+        items={items}
         onEditClick={setFormModalopen}
         onDeleteClick={setDeleteModalopen}
       />

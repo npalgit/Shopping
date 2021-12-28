@@ -44,7 +44,7 @@ const ItemForm = ({ shoppingItem, mode, open, setOpen }) => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       {values && (
-        <Dialog fullScreen open={open} onClose={handleClose}>
+        <Dialog fullWidth maxWidth={"sm"} open={open} onClose={handleClose}>
           <DialogTitle className={classes.header}>
             <Typography className={classes.title}>SHOPPING LIST</Typography>
             <IconButton onClick={handleClose} style={{ marginLeft: "auto" }}>
