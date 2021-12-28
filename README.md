@@ -30,6 +30,8 @@ Add Modal
 
 
 Edit Modal
+![image](https://user-images.githubusercontent.com/13947140/147592231-ee8f1a07-a3de-40dc-bb78-9e918477b73b.png)
+
 
 Delete Modal
 ![image](https://user-images.githubusercontent.com/13947140/147590872-e5ef7341-9564-4c51-af47-d920c2a38569.png)
