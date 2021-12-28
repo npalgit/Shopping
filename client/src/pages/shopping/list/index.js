@@ -1,13 +1,12 @@
 import React from "react";
 import ListShoppingItems from "../components/List";
-import DeleteModal from "../components/Delete";
 import ListHeader from "../../../components/ListHeader";
 import EmptyList from "../../../components/EmptyList";
 import AddModal from "../new";
 import EditModal from "../edit";
+import DeleteModal from "../delete";
 import useItems from "./useItems";
 import { CircularProgress, Box } from "@mui/material";
-
 
 const List = () => {
   const [formModalopen, setFormModalopen] = React.useState({
@@ -23,7 +22,11 @@ const List = () => {
   };
   const isEdit = !!formModalopen.selectedItem;
 
-  const { list: items, isError, isLoading } = useItems();
+  const {
+    list: items,
+    isError,
+    isLoading,
+  } = useItems(formModalopen.open, deleteModalopen.open);
 
   if (isLoading) {
     return (
@@ -61,7 +64,11 @@ const List = () => {
         setOpen={setFormModalopen}
         isEdit={isEdit}
       />
-      <DeleteModal open={deleteModalopen.open} setOpen={setDeleteModalopen} />
+      <DeleteModal
+        shoppingItem={{ ...deleteModalopen.selectedItem }}
+        open={deleteModalopen.open}
+        setOpen={setDeleteModalopen}
+      />
     </>
   );
 };

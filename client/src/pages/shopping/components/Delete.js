@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import FormStyles from "./Form.Styles";
+import DeleteStyles from "./Delete.Styles";
 import {
   Button,
   IconButton,
@@ -14,16 +14,20 @@ import {
 } from "@mui/material";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
 
-const DeleteModal = ({ shoppingItem, open, setOpen }) => {
+const DeleteModal = ({ shoppingItem, open, setOpen, apiCall }) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
-  const [isFormSubmit, setIsFormSubmit] = useState(false);
-  const classes = FormStyles();
+  const classes = DeleteStyles();
 
   const handleClose = () => {
     setOpen({ open: false });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    setIsFormLoading(true);
+    apiCall(shoppingItem._id).then(() => {
+      handleClose();
+    });
+  };
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -36,7 +40,7 @@ const DeleteModal = ({ shoppingItem, open, setOpen }) => {
         </DialogTitle>
         <Box component="form" onSubmit={handleSubmit} noValidate>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText className={classes.text}>
               Are you sure you want to delete this item?This can not be undone.
             </DialogContentText>
           </DialogContent>

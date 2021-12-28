@@ -21,7 +21,7 @@ import { formValidation, itemQuantities } from "../_utility";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
 import { ADD, EDIT } from "../../../constants";
 
-const ItemForm = ({ shoppingItem, mode, open, setOpen }) => {
+const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [isFormSubmit, setIsFormSubmit] = useState(false);
   const classes = FormStyles();
@@ -30,6 +30,9 @@ const ItemForm = ({ shoppingItem, mode, open, setOpen }) => {
     initialValues: shoppingItem,
     onSubmit(values) {
       setIsFormLoading(true);
+      apiCall(values).then(()=>{
+        handleClose();
+      });
     },
     validate: (formValues) => {
       if (isFormSubmit) setIsFormSubmit(false);

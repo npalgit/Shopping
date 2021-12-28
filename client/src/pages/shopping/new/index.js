@@ -2,16 +2,18 @@ import React from "react";
 import Form from "../components/Form";
 import { initialValues } from "../_utility";
 import { ADD } from "../../../constants";
-
+import { addItems } from "./api";
 
 const AddItemModal = ({ open, setOpen, isEdit }) => {
   return (
-    !isEdit && open && (
+    !isEdit &&
+    open && (
       <Form
         shoppingItem={{ ...initialValues }}
         open={open}
         setOpen={setOpen}
         mode={ADD}
+        apiCall={addItems}
       />
     )
   );

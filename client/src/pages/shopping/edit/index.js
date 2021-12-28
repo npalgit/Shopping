@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "../components/Form";
 import { EDIT } from "../../../constants";
+import { editItems } from "./api";
 
 const EditItemModal = ({ shoppingItem, open, setOpen, isEdit }) => {
   return (
@@ -10,6 +11,7 @@ const EditItemModal = ({ shoppingItem, open, setOpen, isEdit }) => {
         open={open}
         setOpen={setOpen}
         mode={EDIT}
+        apiCall={editItems}
       />
     )
   );

@@ -1,12 +1,17 @@
 import React from "react";
 import { getItems } from "./api";
 
-function useItems() {
+function useItems(formModalopen, deleteModalopen) {
   const [items, setItems] = React.useState({
     list: [],
     isError: false,
     isLoading: true,
   });
+
+  React.useEffect(() => {
+    if (!formModalopen || !deleteModalopen)
+      getItems().then(handleSuccess, handleFailure);
+  }, [formModalopen, deleteModalopen]);
 
   React.useEffect(() => {
     getItems().then(handleSuccess, handleFailure);
