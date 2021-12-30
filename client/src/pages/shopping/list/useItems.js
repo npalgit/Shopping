@@ -1,7 +1,7 @@
 import React from "react";
 import { getItems } from "./api";
 
-function useItems(formModalopen, deleteModalopen) {
+function useItems(apiStatus) {
   const [items, setItems] = React.useState({
     list: [],
     isError: false,
@@ -9,9 +9,9 @@ function useItems(formModalopen, deleteModalopen) {
   });
 
   React.useEffect(() => {
-    if (!formModalopen || !deleteModalopen)
+    if (apiStatus.show)
       getItems().then(handleSuccess, handleFailure);
-  }, [formModalopen, deleteModalopen]);
+  }, [apiStatus]);
 
   React.useEffect(() => {
     getItems().then(handleSuccess, handleFailure);

@@ -4,7 +4,7 @@ import { initialValues } from "../_utility";
 import { ADD } from "../../../constants";
 import { addItems } from "./api";
 
-const AddItemModal = ({ open, setOpen, isEdit }) => {
+const AddItemModal = ({ open, setOpen, isEdit, setApiStatus }) => {
   return (
     !isEdit &&
     open && (
@@ -14,6 +14,7 @@ const AddItemModal = ({ open, setOpen, isEdit }) => {
         setOpen={setOpen}
         mode={ADD}
         apiCall={addItems}
+        setApiStatus={setApiStatus}
       />
     )
   );

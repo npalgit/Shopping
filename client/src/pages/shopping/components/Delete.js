@@ -13,8 +13,19 @@ import {
   Box,
 } from "@mui/material";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
+import {
+  form_text_builder,
+  API_DELETE_SUCCESS_MESSAGE,
+  API_ERROR_MESSAGE,
+} from "../../../constants";
 
-const DeleteModal = ({ shoppingItem, open, setOpen, apiCall }) => {
+const DeleteModal = ({
+  shoppingItem,
+  open,
+  setOpen,
+  apiCall,
+  setApiStatus,
+}) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
   const classes = DeleteStyles();
 
@@ -24,9 +35,22 @@ const DeleteModal = ({ shoppingItem, open, setOpen, apiCall }) => {
 
   const handleSubmit = () => {
     setIsFormLoading(true);
-    apiCall(shoppingItem._id).then(() => {
-      handleClose();
-    });
+    apiCall(shoppingItem._id)
+      .then((response) => {
+        setApiStatus({
+          status: response.status,
+          message: response.message,
+          show: true,
+        });
+        handleClose();
+      })
+      .catch((e) => {
+        setApiStatus({
+          status: "failed",
+          message: API_ERROR_MESSAGE,
+          show: true,
+        });
+      });
   };
 
   return (

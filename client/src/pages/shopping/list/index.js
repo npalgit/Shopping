@@ -2,6 +2,7 @@ import React from "react";
 import ListShoppingItems from "../components/List";
 import ListHeader from "../../../components/ListHeader";
 import EmptyList from "../../../components/EmptyList";
+import Banner from "../../../components/Banner";
 import AddModal from "../new";
 import EditModal from "../edit";
 import DeleteModal from "../delete";
@@ -17,6 +18,11 @@ const List = () => {
     selectedItem: {},
     open: false,
   });
+  const [apiStatus, setApiStatus] = React.useState({
+    show: false,
+    status: "",
+    message: "",
+  });
   const handleClickFormModalOpen = () => {
     setFormModalopen({ open: true });
   };
@@ -26,7 +32,7 @@ const List = () => {
     list: items,
     isError,
     isLoading,
-  } = useItems(formModalopen.open, deleteModalopen.open);
+  } = useItems(apiStatus);
 
   if (isLoading) {
     return (
@@ -40,6 +46,7 @@ const List = () => {
 
   return (
     <>
+      <Banner apiStatus={apiStatus} setApiStatus={setApiStatus} />
       <ListHeader
         handleClickFormModalOpen={handleClickFormModalOpen}
         isEmpty={isEmptyList}
@@ -57,17 +64,20 @@ const List = () => {
         open={formModalopen.open}
         setOpen={setFormModalopen}
         isEdit={isEdit}
+        setApiStatus={setApiStatus}
       />
       <EditModal
         shoppingItem={{ ...formModalopen.selectedItem }}
         open={formModalopen.open}
         setOpen={setFormModalopen}
         isEdit={isEdit}
+        setApiStatus={setApiStatus}
       />
       <DeleteModal
         shoppingItem={{ ...deleteModalopen.selectedItem }}
         open={deleteModalopen.open}
         setOpen={setDeleteModalopen}
+        setApiStatus={setApiStatus}
       />
     </>
   );

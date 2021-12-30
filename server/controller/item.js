@@ -34,7 +34,7 @@ exports.createItem = async (req, res) => {
     if (!item.length) {
       item = await Item.create(query);
 
-      if (item) res.status(201).json({ status: "successful", data: item });
+      if (item) res.status(201).json({ status: "successful", data: item,  message: "item successfully added",});
     } else {
       return res.status(400).json({
         status: "failed",
@@ -61,6 +61,7 @@ exports.updateItem = async (req, res) => {
       });
       res.status(201).json({
         status: "successful",
+        message: "item successfully saved",
         data: item,
       });
     } else {
@@ -86,6 +87,7 @@ exports.deleteItem = async (req, res) => {
         res.status(201).json({
           status: "successful",
           data: item,
+          message: "item successfully deleted",
         });
       } else {
         return res.status(400).json({

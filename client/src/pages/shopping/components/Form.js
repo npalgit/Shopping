@@ -19,9 +19,16 @@ import Typography from "@mui/material/Typography";
 import useForm from "../../../hooks/useForm";
 import { formValidation, itemQuantities } from "../_utility";
 import SubmitButtonWithLoader from "../../../components/SubmitButtonWithLoader";
-import { ADD, EDIT, form_text_builder } from "../../../constants";
+import { form_text_builder, API_ERROR_MESSAGE } from "../../../constants";
 
-const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
+const ItemForm = ({
+  shoppingItem,
+  mode,
+  open,
+  setOpen,
+  apiCall,
+  setApiStatus,
+}) => {
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [isFormSubmit, setIsFormSubmit] = useState(false);
   const classes = FormStyles();
@@ -30,9 +37,22 @@ const ItemForm = ({ shoppingItem, mode, open, setOpen, apiCall }) => {
     initialValues: shoppingItem,
     onSubmit(values) {
       setIsFormLoading(true);
-      apiCall(values).then(() => {
-        handleClose();
-      });
+      apiCall(values)
+        .then((response) => {
+          setApiStatus({
+            status: response.status,
+            message: response.message,
+            show: true,
+          });
+          handleClose();
+        })
+        .catch((e) => {
+          setApiStatus({
+            status: "failed",
+            message: API_ERROR_MESSAGE,
+            show: true,
+          });
+        });
     },
     validate: (formValues) => {
       if (isFormSubmit) setIsFormSubmit(false);

@@ -7,7 +7,7 @@ module.exports = {
   mode: process.env.NODE_ENV || "development",
   resolve: { modules: [path.resolve(__dirname, "src"), "node_modules"] },
   devServer: { contentBase: path.join(__dirname, "src") },
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -26,4 +26,5 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
+  watch: true,
 };
